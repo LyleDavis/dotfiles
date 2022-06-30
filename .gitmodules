@@ -13,3 +13,6 @@
 [submodule ".vim/pack/vendor/start/vim-airline-themes"]
 	path = .vim/pack/vendor/start/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes.git
+[submodule ".vim/pack/vendor/start/fugitive"]
+	path = .vim/pack/vendor/start/fugitive
+	url = https://tpope.io/vim/fugitive.git
