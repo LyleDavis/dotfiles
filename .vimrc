@@ -1,6 +1,7 @@
 set t_Co=256
 
 syntax enable
+filetype plugin indent on
 set background=dark
 set number
 set termguicolors
