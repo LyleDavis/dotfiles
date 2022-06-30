@@ -14,6 +14,14 @@ SAVEHIST=10000
 setopt autocd beep extendedglob nomatch notify
 bindkey -v
 bindkey '^R' history-incremental-pattern-search-backward
+
+# word navigation
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+bindkey "[C" forward-word
+bindkey "[D" backward-word
+
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/falstaff/.zshrc'
