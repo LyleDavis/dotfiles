@@ -1,3 +1,6 @@
 [user]
 	email = me@lyledavis.dev
 	name = Lyle Davis
+	signingkey = "F521E5141EC506C7"
+[commit]
+	gpgsign = true
