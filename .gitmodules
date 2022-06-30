@@ -7,3 +7,6 @@
 [submodule ".vim/pack/vendor/start/vim-colors-solarized"]
 	path = .vim/pack/vendor/start/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/pack/vendor/start/vim-airline"]
+	path = .vim/pack/vendor/start/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
