@@ -5,6 +5,7 @@ set background=dark
 set number
 set termguicolors
 colorscheme solarized
+let g:airline_theme='solarized_flood'
 
 " pane switching mappings - using ctrl-hjkl
 map <C-j> <C-W>j
