@@ -10,6 +10,7 @@ alias gcm='git commit'
 alias dps='docker ps'
 alias w='watch'
 alias localstack='aws --endpoint-url=http://localhost:4566'
+alias bat='batcat'
 
 # Functions
 
