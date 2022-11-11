@@ -1,7 +1,7 @@
 [user]
 	email = me@lyledavis.dev
 	name = Lyle Davis
-	signingkey = "F521E5141EC506C7"
+	signingkey = "putsigningkeyhere"
 [commit]
 	gpgsign = true
 [core]
