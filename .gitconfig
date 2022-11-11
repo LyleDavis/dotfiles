@@ -1,8 +1,9 @@
 [user]
 	email = me@lyledavis.dev
 	name = Lyle Davis
-	signingkey = "putsigningkeyhere"
 [commit]
 	gpgsign = true
 [core]
 	editor = "vim -u NONE"
+[include]
+	path = .gitconfig.signingkey
