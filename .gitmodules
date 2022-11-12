@@ -1,27 +1,21 @@
 [submodule "powerlevel10k"]
 	path = powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
-[submodule ".vim/pack/vendor/start/nerdtree"]
-	path = .vim/pack/vendor/start/nerdtree
-	url = https://github.com/preservim/nerdtree.git
-[submodule ".vim/pack/vendor/start/vim-colors-solarized"]
-	path = .vim/pack/vendor/start/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule ".vim/pack/vendor/start/vim-airline"]
-	path = .vim/pack/vendor/start/vim-airline
-	url = https://github.com/vim-airline/vim-airline.git
-[submodule ".vim/pack/vendor/start/vim-airline-themes"]
-	path = .vim/pack/vendor/start/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes.git
-[submodule ".vim/pack/vendor/start/fugitive"]
+[submodule ".vim/pack/vendor/opt/fugitive"]
 	path = .vim/pack/vendor/opt/fugitive
 	url = https://tpope.io/vim/fugitive.git
-[submodule ".vim/pack/vendor/start/rust.vim"]
-	path = .vim/pack/vendor/start/rust.vim
-	url = https://github.com/rust-lang/rust.vim
-[submodule ".vim/pack/vendor/start/onedark.vim"]
-	path = .vim/pack/vendor/start/onedark.vim
+[submodule ".vim/pack/vendor/opt/nerdtree"]
+	path = .vim/pack/vendor/opt/nerdtree
+	url = https://github.com/preservim/nerdtree.git
+[submodule ".vim/pack/vendor/opt/onedark.vim"]
+	path = .vim/pack/vendor/opt/onedark.vim
 	url = git@github.com:joshdick/onedark.vim.git
-[submodule ".vim/pack/vendor/start/vim-polyglot"]
-	path = .vim/pack/vendor/start/vim-polyglot
+[submodule ".vim/pack/vendor/opt/vim-airline"]
+	path = .vim/pack/vendor/opt/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule ".vim/pack/vendor/opt/vim-polyglot"]
+	path = .vim/pack/vendor/opt/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
+[submodule ".vim/pack/vendor/opt/vim-gitgutter"]
+	path = .vim/pack/vendor/opt/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git

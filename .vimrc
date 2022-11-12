@@ -1,6 +1,13 @@
 set t_Co=256
 set termguicolors
 
+packadd! fugitive
+packadd! nerdtree
+packadd! onedark.vim
+packadd! vim-airline
+packadd! vim-polyglot
+packadd! vim-gitgutter
+
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
 " let g:airline_theme='onedark'
