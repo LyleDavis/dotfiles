@@ -57,6 +57,9 @@ set mouse=a
 " NERDTree
 let NERDTreeShowHidden=1
 
+" make background transparent - onedark theme is slightly off
+autocmd VimEnter * hi Normal guibg=NONE ctermbg=NONE
+
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
