@@ -1,0 +1,4 @@
+.idea/
+*secrets.env
+*secrets.env.yml
+*codeship.aes*

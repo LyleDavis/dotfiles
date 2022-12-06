@@ -29,3 +29,7 @@ function from_sage_gemserver() {
   gem_version=$2
   gem install --source=https://$BUNDLE_SAGEONEGEMS__JFROG__IO@$SAGE_GEM_REPO $gem_name:$gem_version
 }
+
+if test -f "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi

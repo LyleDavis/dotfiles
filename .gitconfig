@@ -5,5 +5,8 @@
 	gpgsign = true
 [core]
 	editor = "vim -u NONE"
+	excludesfile = ~/dotfiles/.gitignore
 [include]
 	path = .gitconfig.signingkey
+[push]
+	autoSetupRemote = true
