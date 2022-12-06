@@ -21,8 +21,13 @@ bindkey '^R' history-incremental-pattern-search-backward
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
-bindkey "[C" forward-word
+# bindkey "[C" forward-word
+# bindkey "[D" backward-word
+
 bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
 
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
