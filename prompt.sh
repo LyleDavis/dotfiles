@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$HOME"/dotfiles/git-prompt.sh
+source ~/dotfiles/git-prompt.sh
 
 export CLICOLOR=1
 export LSCOLORS='exfxcxdxbxegedabagacad'
@@ -25,11 +25,10 @@ function __prompt_command() {
 
   PS1=""
   PROMPT_DIRTRIM=3
-  PS1+="${Bla}${On_Blu} \w ${RCol}"
   GIT_PS1_SHOWSTASHSTATE=1
   GIT_PS1_SHOWUPSTREAM=verbose
   GIT_PS1_SHOWCONFLICTSTATE=1
-  PS1+="${Bla}${On_Blu}$(__git_ps1 'on %s ')${RCol}"
+  PS1+="${Bla}${On_Blu} \w $(__git_ps1 'on %s ')${RCol}"
   if [ -n "$SSH_TTY" ]; then
     PS1+="${Bla}${On_Gre} SSH ${RCol}"
   fi
