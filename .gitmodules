@@ -1,6 +1,3 @@
-[submodule "powerlevel10k"]
-	path = powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
 [submodule ".vim/pack/vendor/opt/fugitive"]
 	path = .vim/pack/vendor/opt/fugitive
 	url = https://tpope.io/vim/fugitive.git
@@ -19,3 +16,6 @@
 [submodule ".vim/pack/vendor/opt/vim-gitgutter"]
 	path = .vim/pack/vendor/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
+[submodule ".vim/pack/vendor/opt/nord-vim"]
+	path = .vim/pack/vendor/opt/nord-vim
+	url = https://github.com/arcticicestudio/nord-vim.git

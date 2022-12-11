@@ -3,21 +3,20 @@ set termguicolors
 
 packadd! fugitive
 packadd! nerdtree
-packadd! onedark.vim
+packadd! nord-vim
 packadd! vim-airline
 packadd! vim-polyglot
 packadd! vim-gitgutter
 
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-" let g:airline_theme='onedark'
 syntax on
 set showmatch
-colorscheme onedark
+colorscheme nord
+let g:nord_cursor_line_number_background = 1
+let g:nord_uniform_diff_background = 1
+let g:nord_italic_comments = 1
+let g:nord_underline = 1
 filetype plugin indent on
-set background=dark
 set number
-" let g:airline_theme='bubblegum'
 
 " pane switching mappings - using ctrl-hjkl
 map <C-j> <C-W>j
@@ -49,9 +48,6 @@ set mouse=a
 
 " NERDTree
 let NERDTreeShowHidden=1
-
-" make background transparent - onedark theme is slightly off
-autocmd VimEnter * hi Normal guibg=NONE ctermbg=NONE
 
 " Start NERDTree when Vim starts with a directory argument.
 autocmd StdinReadPre * let s:std_in=1

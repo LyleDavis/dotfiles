@@ -1,11 +1,13 @@
 [user]
-	email = me@lyledavis.dev
 	name = Lyle Davis
+	email = me@lyledavis.dev
 [commit]
 	gpgsign = true
 [core]
 	editor = "vim -u NONE"
 	excludesfile = ~/dotfiles/.gitignore
+	fsmonitor = true
+	untrackedcache = true
 [include]
 	path = .gitconfig.signingkey
 [push]
