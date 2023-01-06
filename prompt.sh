@@ -29,7 +29,7 @@ function __prompt_command() {
   GIT_PS1_SHOWUPSTREAM=verbose
   GIT_PS1_SHOWCONFLICTSTATE=1
   if [ ! -f ~/.whitelistuserforprompt ]; then
-    PS1+="${Bla}${On_Pur}\u@\h ${RCol}"
+    PS1+="${Bla}${On_Pur} \u@\h ${RCol}"
   fi
 
   PS1+="${Bla}${On_Blu} \w $(__git_ps1 'on %s ')${RCol}"
