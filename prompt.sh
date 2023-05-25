@@ -29,17 +29,19 @@ function __prompt_command() {
   GIT_PS1_SHOWUPSTREAM=verbose
   GIT_PS1_SHOWCONFLICTSTATE=1
   if [ ! -f ~/.whitelistuserforprompt ]; then
-    PS1+="${Bla}${On_Pur} \u@\h ${RCol}"
+    PS1+="${Bla}${Pur} \u@\h${RCol}"
   fi
 
-  PS1+="${Bla}${On_Blu} \w $(__git_ps1 'on %s ')${RCol}"
-  if [ -n "$SSH_TTY" ]; then
-    PS1+="${Bla}${On_Gre} SSH ${RCol}"
+# PS1+="${Bla}${Blu}\w $(__git_ps1 'on %s')${RCol}"
+ PS1+="${Bla}${Blu}\w ${RCol}"
+ if [ -n "$SSH_TTY" ]; then
+    PS1+="${Bla}${Gre} SSH${RCol}"
   fi
   if [ "${EXIT}" != "0" ]; then
-    PS1+="${Whi}${On_Red} ! ${RCol}"
+    PS1+="${Whi}${Red} !${RCol}"
   fi
   PS1+=" "
 }
 
 export PROMPT_COMMAND=__prompt_command
+
