@@ -3,18 +3,18 @@ set termguicolors
 
 packadd! fugitive
 packadd! nerdtree
-packadd! nord-vim
+" packadd! nord-vim
 packadd! vim-airline
 packadd! vim-polyglot
-packadd! vim-gitgutter
+" packadd! vim-gitgutter
 
 syntax on
 set showmatch
-colorscheme nord
-let g:nord_cursor_line_number_background = 1
-let g:nord_uniform_diff_background = 1
-let g:nord_italic_comments = 1
-let g:nord_underline = 1
+" colorscheme nord
+" let g:nord_cursor_line_number_background = 1
+" let g:nord_uniform_diff_background = 1
+" let g:nord_italic_comments = 1
+" let g:nord_underline = 1
 filetype plugin indent on
 set number
 
@@ -38,6 +38,9 @@ set autoindent
 
 " highlight search results
 set hlsearch
+
+" make comments italics
+highlight Comment cterm=italic gui=italic
 
 " matching brackets
 set showmatch
