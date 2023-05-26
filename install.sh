@@ -15,7 +15,6 @@ function replace() {
 }
 
 replace ".vim"
-replace ".bashrc"
 replace ".tmux.conf"
 replace ".gitconfig"
 replace ".gitignore"
