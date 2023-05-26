@@ -13,10 +13,10 @@
 # ruby
 if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
-  type -P rbenv &> /dev/null && eval "$(rbenv init - bash)"
+  type -P rbenv &> /dev/null && eval "$(rbenv init - zsh)"
 else
   if [ -d ~/.rbenv ]; then
-    eval "$(~/.rbenv/bin/rbenv init - bash)"
+    eval "$(~/.rbenv/bin/rbenv init - zsh)"
   fi
 fi
 
