@@ -2,6 +2,8 @@
 
 set -e
 
+git submodule update --init --recursive
+
 touch ~/.credentials.sh
 
 function replace() {
