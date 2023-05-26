@@ -9,5 +9,9 @@
 
 setopt ALWAYS_TO_END
 setopt AUTO_PARAM_SLASH
+
+autoload -U compinit
+compinit
+
 # get gpg password for commit signing from command line
 export GPG_TTY=$TTY
