@@ -1,14 +1,6 @@
 #!/usr/bin/env zsh
 
-# zsh completion
-# if type brew &>/dev/null; then
-#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-#   autoload -Uz compinit
-#   compinit
-
-#   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-# fi
+source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # ruby
 if [ -d /opt/homebrew ]; then
