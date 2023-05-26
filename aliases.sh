@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 alias stop_all_containers='docker stop $(docker ps -q -a)'
 #alias cat='bat'

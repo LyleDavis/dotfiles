@@ -1,11 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-shopt -q autocd cdspell checkjobs checkwinsize cmdhist dirspell
-bind 'set completion-ignore-case on'
+# shopt -q autocd cdspell checkjobs checkwinsize cmdhist dirspell
+# bind 'set completion-ignore-case on'
 
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:/usr/local/go/bin
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
 
+setopt ALWAYS_TO_END
+setopt AUTO_PARAM_SLASH
 # get gpg password for commit signing from command line
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY

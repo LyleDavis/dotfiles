@@ -1,5 +1,16 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
+# zsh completion
+# if type brew &>/dev/null; then
+#   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+#   autoload -Uz compinit
+#   compinit
+
+#   export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+# fi
+
+# ruby
 if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
   type -P rbenv &> /dev/null && eval "$(rbenv init - bash)"
@@ -9,16 +20,16 @@ else
   fi
 fi
 
-[ -d "/usr/local/go" ] && export PATH=$PATH:/usr/local/go/bin
+# go
+if [ -d "/usr/local/go" ]; then
+  export PATH=$PATH:/usr/local/go/bin
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+fi
 
+# node
 if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
-
-#[ -d "/opt/homebrew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-# if homebrew exists, assume rbenv is already in path
-#[ -d "/opt/homebrew" ] && type -P rbenv &> /dev/null && eval "$(rbenv init - bash)"
-# if homebrew does not exist and rbenv has been cloned then use that to initialise
-#[ ! -d "/opt/homebrew" ] && [ -d "~/.rbenv" ] && eval "$(~/.rbenv/bin/rbenv init - bash)"

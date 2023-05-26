@@ -19,3 +19,6 @@
 [submodule ".vim/pack/vendor/opt/nord-vim"]
 	path = .vim/pack/vendor/opt/nord-vim
 	url = https://github.com/arcticicestudio/nord-vim.git
+[submodule "powerlevel10k"]
+	path = powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
