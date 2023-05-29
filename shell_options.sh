@@ -3,12 +3,10 @@
 # shopt -q autocd cdspell checkjobs checkwinsize cmdhist dirspell
 # bind 'set completion-ignore-case on'
 
-# export PATH=$PATH:/usr/local/go/bin
-# export GOPATH=$HOME/go
-# export PATH=$PATH:$GOPATH/bin
-
 setopt ALWAYS_TO_END
 setopt AUTO_PARAM_SLASH
+
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit

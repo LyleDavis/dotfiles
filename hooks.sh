@@ -17,13 +17,6 @@ else
   fi
 fi
 
-# go
-if [ -d "/usr/local/go" ]; then
-  export PATH=$PATH:/usr/local/go/bin
-  export GOPATH=$HOME/go
-  export PATH=$PATH:$GOPATH/bin
-fi
-
 # node
 if [ -d "$HOME/.nvm" ]; then
   export NVM_DIR="$HOME/.nvm"
