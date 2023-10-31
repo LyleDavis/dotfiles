@@ -4,7 +4,7 @@
 [commit]
 	gpgsign = true
 [core]
-	editor = "vim -u NONE"
+	editor = "vim"
 	excludesfile = ~/dotfiles/.gitignore
 	fsmonitor = true
 	untrackedcache = true

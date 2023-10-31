@@ -2,19 +2,19 @@
 
 source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# homebrew
+if [ -d /opt/homebrew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # aws completions
 if [ -f /usr/local/bin/aws_completer ]; then
   complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 # ruby
-if [ -d /opt/homebrew ]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  type -P rbenv &> /dev/null && eval "$(rbenv init - zsh)"
-else
-  if [ -d ~/.rbenv ]; then
-    eval "$(~/.rbenv/bin/rbenv init - zsh)"
-  fi
+if [ -d ~/.rbenv ]; then
+  eval "$(~/.rbenv/bin/rbenv init - zsh)"
 fi
 
 # node
