@@ -25,3 +25,6 @@
 [submodule "zsh-autosuggestions"]
 	path = zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".vim/pack/vendor/opt/vim-github-dark"]
+	path = .vim/pack/vendor/opt/vim-github-dark
+	url = https://github.com/vv9k/vim-github-dark.git
