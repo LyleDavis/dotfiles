@@ -1,6 +1,5 @@
 [user]
 	name = Lyle Davis
-	email = lyle.davis@sage.com
 [include]
 	path = .gitconfig.email
 [commit]
