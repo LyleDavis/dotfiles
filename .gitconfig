@@ -1,15 +1,20 @@
 [user]
 	name = Lyle Davis
-	email = me@lyledavis.dev
+[include]
+	path = .gitconfig.emailandsigningkey
 [commit]
 	gpgsign = true
+[tag]
+	gpgSign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 [core]
 	editor = "vim"
 	excludesfile = ~/dotfiles/.gitignore
 	fsmonitor = true
 	untrackedcache = true
-[include]
-	path = .gitconfig.signingkey
 [push]
 	autoSetupRemote = true
 [init]
