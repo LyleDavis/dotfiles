@@ -1,7 +1,8 @@
 [user]
 	name = Lyle Davis
+	email = lyle.davis@sage.com
 [include]
-	path = .gitconfig.emailandsigningkey
+	path = .gitconfig.email
 [commit]
 	gpgsign = true
 [tag]
@@ -9,7 +10,7 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+	defaultKeyCommand = "ssh-add -L | grep $(git config user.email) | sed 1q"
 [core]
 	editor = "vim"
 	excludesfile = ~/dotfiles/.gitignore
