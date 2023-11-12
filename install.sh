@@ -24,7 +24,10 @@ replace ".p10k.zsh"
 replace ".zshrc"
 replace "golang_vars.sh"
 replace ".zshenv"
+mkdir -p ~/Library/LaunchAgents # this doesn't exist on linux but it doesn't do anything in that case so we may as well have it
 replace "Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist"
 
 # symlink to .1password for more standardised access
-mkdir -p ~/.1password && ln -sf ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+if test -f ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock; then
+  mkdir -p ~/.1password && ln -sf ~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock ~/.1password/agent.sock
+fi
