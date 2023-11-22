@@ -5,12 +5,12 @@ source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 # homebrew
 if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  if [ -f /opt/homebrew/share/zsh/site-functions/aws_zsh_completer.sh ]; then
+    . /opt/homebrew/share/zsh/site-functions/aws_zsh_completer.sh
+  fi
 fi
 
-# aws completions
-if [ -f /usr/local/bin/aws_completer ]; then
-  complete -C '/usr/local/bin/aws_completer' aws
-fi
 
 # ruby
 if [ -d ~/.rbenv ]; then
