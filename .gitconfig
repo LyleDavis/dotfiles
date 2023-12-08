@@ -2,6 +2,8 @@
 	name = Lyle Davis
 [include]
 	path = .gitconfig.email
+[includeIf "gitdir:~/work/**"]
+    	path = ~/work/.gitconfig.email
 [commit]
 	gpgsign = true
 [tag]
@@ -9,7 +11,7 @@
 [gpg]
 	format = ssh
 [gpg "ssh"]
-	defaultKeyCommand = "ssh-add -L | grep $(git config user.email) | sed 1q"
+	defaultKeyCommand = "ssh-add -L | sed 1q"
 [core]
 	editor = "vim"
 	excludesfile = ~/dotfiles/.gitignore
