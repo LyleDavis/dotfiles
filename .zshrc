@@ -6,8 +6,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 . ~/.credentials.sh
-. ~/dotfiles/shell_options.sh
 . ~/dotfiles/aliases.sh
 . ~/dotfiles/functions.sh
 . ~/dotfiles/hooks.sh
+. ~/dotfiles/shell_options.sh 
 . ~/dotfiles/prompt.sh

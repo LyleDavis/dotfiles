@@ -6,9 +6,7 @@ source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  if [ -f /opt/homebrew/share/zsh/site-functions/aws_zsh_completer.sh ]; then
-    . /opt/homebrew/share/zsh/site-functions/aws_zsh_completer.sh
-  fi
+  export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 
