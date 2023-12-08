@@ -11,3 +11,4 @@ fi
 . ~/dotfiles/hooks.sh
 . ~/dotfiles/shell_options.sh 
 . ~/dotfiles/prompt.sh
+

@@ -1,5 +1,9 @@
 #!/usr/bin/env zsh
 
+# 1password plugins for providing some credentials like gh pat
+source ~/.config/op/plugins.sh
+
+export ZSH_AUTOSUGGEST_STRATEGY=completion
 source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # homebrew
