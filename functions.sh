@@ -9,8 +9,9 @@ function use_env() {
   export "$(grep -Ev '^#' "$1" | xargs)"
 }
 
-function from_sage_gemserver() {
-  gem_name=$1
-  gem_version=$2
-  gem install --source=https://$BUNDLE_SAGEONEGEMS__JFROG__IO@$SAGE_GEM_REPO $gem_name:$gem_version
+function ecr_login() {
+  region="$(aws configure get region)"
+  account_id="$(aws configure get sso_account_id)"
+  aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$account_id".dkr.ecr."$region".amazonaws.com
 }
+
