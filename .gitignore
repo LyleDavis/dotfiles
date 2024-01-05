@@ -3,3 +3,4 @@
 *secrets.env.yml
 *codeship.aes*
 .ruby-lsp/
+*.iml
