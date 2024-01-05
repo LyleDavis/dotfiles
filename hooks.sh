@@ -11,12 +11,12 @@ if [ -d /opt/homebrew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
   export FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
-
-# ruby
-if [ -d ~/.rbenv ]; then
-  eval "$(~/.rbenv/bin/rbenv init - zsh)"
+  
+  # ruby
+  if [ -d /opt/homebrew/opt/chruby ]; then
+    source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+    source /opt/homebrew/opt/chruby/share/chruby/auto.sh
+  fi
 fi
 
 # node
