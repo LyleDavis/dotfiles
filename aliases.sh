@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
 alias stop_all_containers='docker stop $(docker ps -q -a)'
-#alias cat='bat'
-#alias catp='bat --style=plain'
+alias cat='bat'
+alias catp='bat --style=plain'
 alias lzd='lazydocker'
 alias ll='ls -al'
 alias gst='git status'
