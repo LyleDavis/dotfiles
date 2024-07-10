@@ -14,6 +14,10 @@ function replace() {
   echo "symlinked $path"  
 }
 
+if [[ "$OSTYPE" == *darwin* ]]; then
+  bash macpack.sh
+fi
+
 replace ".vim"
 replace ".tmux.conf"
 replace ".gitconfig"

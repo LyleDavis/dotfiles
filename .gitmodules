@@ -16,9 +16,6 @@
 [submodule ".vim/pack/vendor/opt/vim-gitgutter"]
 	path = .vim/pack/vendor/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule ".vim/pack/vendor/opt/nord-vim"]
-	path = .vim/pack/vendor/opt/nord-vim
-	url = https://github.com/arcticicestudio/nord-vim.git
 [submodule "powerlevel10k"]
 	path = powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
@@ -28,3 +25,6 @@
 [submodule ".vim/pack/vendor/opt/vim-github-dark"]
 	path = .vim/pack/vendor/opt/vim-github-dark
 	url = https://github.com/vv9k/vim-github-dark.git
+[submodule ".vim/pack/vendor/opt/abstract.vim"]
+	path = .vim/pack/vendor/opt/abstract.vim
+	url = git@github.com:jdsimcoe/abstract.vim.git

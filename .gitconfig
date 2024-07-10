@@ -13,7 +13,7 @@
 [gpg "ssh"]
 	defaultKeyCommand = "ssh-add -L | sed 1q"
 [core]
-	editor = "vim"
+	editor = vim -u NONE
 	excludesfile = ~/dotfiles/.gitignore
 	fsmonitor = true
 	untrackedcache = true

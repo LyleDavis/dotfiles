@@ -4,3 +4,4 @@
 *codeship.aes*
 .ruby-lsp/
 *.iml
+.DS_Store

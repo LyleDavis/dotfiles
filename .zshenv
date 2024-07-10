@@ -5,3 +5,5 @@ fi
 if [ -d "/usr/local/go" ]; then
   . "$HOME/golang_vars.sh"
 fi
+
+export PATH="$PATH:$HOME/.emacs.d/bin"
