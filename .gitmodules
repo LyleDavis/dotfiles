@@ -28,3 +28,6 @@
 [submodule ".vim/pack/vendor/opt/abstract.vim"]
 	path = .vim/pack/vendor/opt/abstract.vim
 	url = git@github.com:jdsimcoe/abstract.vim.git
+[submodule "nord"]
+	path = .vim/pack/vendor/opt/nord
+	url = https://github.com/nordtheme/vim.git
