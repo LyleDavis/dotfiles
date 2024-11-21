@@ -4,6 +4,7 @@ alias stop_all_containers='docker stop $(docker ps -q -a)'
 alias cat='bat'
 alias catp='bat --style=plain'
 alias lzd='lazydocker'
+alias ls="ls --color=auto"
 alias ll='ls -al'
 alias gst='git status'
 alias gcm='git commit'

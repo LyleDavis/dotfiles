@@ -5,3 +5,4 @@
 .ruby-lsp/
 *.iml
 .DS_Store
+*.gitignored.*

@@ -3,14 +3,14 @@ set termguicolors
 
 packadd! fugitive
 packadd! nerdtree
-packadd! nord
+" packadd! nord
 packadd! vim-airline
 packadd! vim-polyglot
 packadd! abstract.vim
 
 syntax on
 set showmatch
-colorscheme nord
+" colorscheme nord
 filetype plugin indent on
 set number
 
