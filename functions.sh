@@ -9,6 +9,10 @@ function use_env() {
   export "$(grep -Ev '^#' "$1" | xargs)"
 }
 
+function aws_login() {
+  aws sso login && ecr_login
+}
+
 function ecr_login() {
   (
   if [[ -n "$1" ]]; then

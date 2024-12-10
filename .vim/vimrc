@@ -1,16 +1,16 @@
 set t_Co=256
-set termguicolors
+" set termguicolors
 
 packadd! fugitive
 packadd! nerdtree
-" packadd! nord
 packadd! vim-airline
+packadd! vim-airline-themes
+let g:airline_theme='bubblegum'
 packadd! vim-polyglot
 packadd! abstract.vim
 
 syntax on
 set showmatch
-" colorscheme nord
 filetype plugin indent on
 set number
 
