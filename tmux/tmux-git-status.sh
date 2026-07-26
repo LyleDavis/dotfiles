@@ -18,7 +18,7 @@ if [[ "$PANE_CURRENT_CMD" == "nvim" ]]; then
   exit
 fi
 
-cd "$PANE_CURRENT_PATH"
+cd "$PANE_CURRENT_PATH" || exit
 s="$($GSS_BIN)"
 
 # if gss didn't output anything just exit - nothing to display
@@ -26,4 +26,4 @@ if [ -z "$s" ]; then
   exit
 fi
 
-printf "#[bg=default,fg=white] $s"
+printf '#[bg=default,fg=white] %s' "$s"

@@ -2,10 +2,14 @@
 
 set -e
 
-git submodule update --init --recursive
-
 export DOTFILES_BASE_PATH="$HOME/dotfiles"
 . "$DOTFILES_BASE_PATH/bash/base"
+
+bootstrap_log "starting"
+bootstrap_log "loaded shared bootstrap helpers from bash/base"
+
+bootstrap_log "updating git submodules"
+git submodule update --init --recursive
 
 modules=(
     "1password"
@@ -22,6 +26,14 @@ modules=(
 
 for module in "${modules[@]}"; do
     bs="$DOTFILES_BASE_PATH/$module/bootstrap"
-    [[ -s "$bs" ]] && (. "$bs")
+    if [[ -s "$bs" ]]; then
+        bootstrap_log "running module: $module"
+        (. "$bs")
+        bootstrap_log "finished module: $module"
+    else
+        bootstrap_log "skipping module: $module (no bootstrap script)"
+    fi
 done
+
+bootstrap_log "done"
 
