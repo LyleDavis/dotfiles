@@ -30,16 +30,11 @@ EOF
 prompt_single_branch="Current Branch ($git_current_branch) > "
 prompt_all_branches='All Branches > '
 
-eval "$git_log_single_branch" | fzf \
+selected_commits="$(eval "$git_log_single_branch" | fzf \
     --ansi --reverse --no-sort --header-first --multi \
     --prompt="$prompt_single_branch" \
     --preview="$git_commit_diff_preview" \
     --header="$header" \
-    --bind="enter:execute(
-        if [ \"{+}\" != \"{}\" ]; then 
-            echo {+} | grep -o '[a-f0-9]\{7\}' | xargs -n1 git rev-parse | git log --no-walk --date-order --format=\"%H\" --stdin
-        fi
-    )+abort" \
     --bind="ctrl-t:transform:(
         if [[ \$FZF_PROMPT == '$prompt_single_branch' ]]; then
             echo 'change-prompt($prompt_all_branches)+reload($git_log_all_branches)'
@@ -53,4 +48,11 @@ eval "$git_log_single_branch" | fzf \
     --bind='ctrl-y:preview-up' \
     --bind='ctrl-e:preview-down' \
     --bind='ctrl-u:preview-half-page-up' \
-    --bind='ctrl-d:preview-half-page-down'
+    --bind='ctrl-d:preview-half-page-down')"
+
+if [[ -n "$selected_commits" ]]; then
+    printf '%s\n' "$selected_commits" \
+        | grep -o '[a-f0-9]\{7\}' \
+        | xargs -n1 git rev-parse \
+        | git log --no-walk --date-order --format="%H" --stdin
+fi
