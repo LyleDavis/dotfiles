@@ -2,9 +2,34 @@
 
 if [[ -s /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
   . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+elif [[ -s /usr/local/etc/profile.d/bash_completion.sh ]]; then
+  . "/usr/local/etc/profile.d/bash_completion.sh"
+elif [[ -s /etc/bash_completion ]]; then
+  . "/etc/bash_completion"
 elif [[ -s /etc/bash/bash_completion.sh ]]; then
-    . "/etc/bash/bash_completion.sh"
+  . "/etc/bash/bash_completion.sh"
+elif [[ -s /usr/share/bash-completion/bash_completion ]]; then
+  . "/usr/share/bash-completion/bash_completion"
 fi
+
+# Some environments do not auto-load git completion; source it as a fallback.
+if ! complete -p git >/dev/null 2>&1; then
+  for git_completion_file in \
+    /opt/homebrew/share/bash-completion/completions/git \
+    /usr/local/share/bash-completion/completions/git \
+    /usr/share/bash-completion/completions/git \
+    /opt/homebrew/etc/bash_completion.d/git-completion.bash \
+    /usr/local/etc/bash_completion.d/git-completion.bash \
+    /usr/share/git/completion/git-completion.bash \
+    /etc/bash_completion.d/git
+  do
+    if [[ -s "$git_completion_file" ]]; then
+      . "$git_completion_file"
+      break
+    fi
+  done
+fi
+
 complete -A binding bind
 complete -A setopt set
 complete -A shopt shopt
@@ -14,3 +39,7 @@ complete -b builtin
 complete -c type which
 complete -cf man sudo
 complete -d cd pushd rmdir
+
+if has aws_completer; then
+  complete -C "$(command -v aws_completer)" aws
+fi

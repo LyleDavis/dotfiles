@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
+set -e
+
 git submodule update --init --recursive
 
 export DOTFILES_BASE_PATH="$HOME/dotfiles"
-export XDG_CONFIG_HOME="$HOME/.config"
+. "$DOTFILES_BASE_PATH/bash/base"
 
 modules=(
     "1password"
@@ -20,6 +22,6 @@ modules=(
 
 for module in "${modules[@]}"; do
     bs="$DOTFILES_BASE_PATH/$module/bootstrap"
-    [[ -s "$bs" ]] && bash "$bs"
+    [[ -s "$bs" ]] && (. "$bs")
 done
 

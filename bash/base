@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+export DOTFILES_BASE_PATH="$HOME/dotfiles"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+has() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+path_prepend() {
+    local dir="$1"
+
+    [[ -n "$dir" ]] || return 1
+    [[ -d "$dir" ]] || return 1
+
+    case ":$PATH:" in
+        *":$dir:"*) ;;
+        *) PATH="$dir:$PATH" ;;
+    esac
+}

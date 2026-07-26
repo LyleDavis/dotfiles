@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-export DOTFILES_BASE_PATH="$HOME/dotfiles"
-export XDG_CONFIG_HOME="$HOME/.config"
+. "$DOTFILES_BASE_PATH/bash/base"
 
 [[ -n "$PS1" ]] || return
 

@@ -3,3 +3,13 @@
 set -ex
 
 echo ". $DOTFILES_BASE_PATH/bash/bashrc" > "$HOME/.bashrc"
+mkdir -p "$XDG_DATA_HOME/bash-completion/completions"
+if has fnm; then
+    fnm completions --shell bash > "$XDG_DATA_HOME/bash-completion/completions/fnm"
+fi
+if has docker; then
+    docker completion bash > "$XDG_DATA_HOME/bash-completion/completions/docker"
+fi
+if has gh; then
+    gh completion -s bash > "$XDG_DATA_HOME/bash-completion/completions/gh"
+fi
