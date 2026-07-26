@@ -20,3 +20,9 @@ set colored-stats on
 TAB: menu-complete
 "\e[Z": menu-complete-backward
 set menu-complete-display-prefix on
+set enable-bracketed-paste on
+# set show-mode-in-prompt on
+# set editing-mode vi
+set mark-directories on
+set completion-map-case on
+set colored-completion-prefix on

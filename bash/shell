@@ -4,9 +4,11 @@ if has fzf; then
     eval "$(fzf --bash)"
 fi
 
-HISTCONTROL="ignorespace:erasedups"
-HISTSIZE=5000
-HISTFILESIZE=5000
+export HISTCONTROL="ignorespace:erasedups"
+export HISTSIZE=5000
+export HISTFILESIZE=5000
+export HISTIGNORE="ls:ll:l:pwd:clear:history"
+export HISTTIMEFORMAT="%F %T "
 
 export EDITOR='vim'
 export VISUAL='vim'
@@ -21,3 +23,11 @@ shopt -s checkwinsize
 shopt -s extglob
 shopt -s autocd   2>/dev/null || true
 shopt -s dirspell 2>/dev/null || true
+shopt -s cmdhist
+shopt -s lithist
+shopt -s globstar
+shopt -s checkjobs
+
+
+set -o noclobber
+
