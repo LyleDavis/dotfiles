@@ -4,7 +4,7 @@ if command -v fzf >/dev/null 2>&1; then
     eval "$(fzf --bash)"
 fi
 
-HISTCONTROL="ignoredups"
+HISTCONTROL="ignorespace:erasedups"
 HISTSIZE=5000
 HISTFILESIZE=5000
 

@@ -36,6 +36,7 @@ function gt() {
 alias gst='git status'
 alias gcm='git commit'
 alias gbc='git branch --show-current'
+alias gac='git add -A && git commit'
 alias lzg='lazygit'
 
 if [[ -d /usr/local/share/chruby ]]; then
