@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+PROMPT_DIRTRIM=2
+prompt_char() {
+    if (( LAST_EXIT != 0 )); then
+        printf $'\001\033[31m\002[%d]\001\033[0m\002' "$LAST_EXIT"
+    else
+        printf $'>'
+    fi
+}
+prompt_cmd() {
+    LAST_EXIT=$?
+    if [[ "$TERM" == tmux* ]]; then
+        # OSC 7: tell tmux the new cwd
+        printf '\033]7;file://%s%s\007' "$HOST" "$PWD"
+    fi
+}
+PROMPT_COMMAND=prompt_cmd
+PS1='$(prompt_char) '
+if [[ "$TERM" != tmux* ]]; then
+    PS1="\w $PS1"
+fi
+if [[ ! -f "$HOME/.hushhostname" ]]; then
+    PS1="\[\e[2m\][$(hostname -s)]\[\e[0m\] $PS1"
+fi

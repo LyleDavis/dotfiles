@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+profile=$(aws configure list-profiles | fzf)
+echo "Logging into $profile ECR..."
+region="$(aws configure get region)"
+account_id="$(aws configure get sso_account_id)"
+
+aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$account_id".dkr.ecr."$region".amazonaws.com

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -ex
+
+echo "config-file = $DOTFILES_BASE_PATH/ghostty/config" > "$HOME/.config/ghostty/config"

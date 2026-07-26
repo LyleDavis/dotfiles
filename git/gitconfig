@@ -1,0 +1,27 @@
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
+[gpg]
+	format = ssh
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+	fsmonitor = true
+	untrackedcache = true
+  	pager = delta
+[push]
+	autoSetupRemote = true
+[init]
+	defaultBranch = master
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	line-numbers = true
+[merge]
+	conflictStyle = zdiff3
+[include]
+	path = ~/.gitconfig.local
+[includeIf "gitdir:~/work/**"]
+	path = ~/work/.gitconfig.local

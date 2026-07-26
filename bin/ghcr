@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z "$GITHUB_TOKEN" ]]; then
+    echo "github token not set"
+    exit 1
+fi
+
+username=$(curl -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/user | jq -r '.login')
+echo "Logging in as: $username"
+echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$username" --password-stdin

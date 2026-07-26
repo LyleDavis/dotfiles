@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo "\$include $DOTFILES_BASE_PATH/readline/inputrc" > "$HOME/.inputrc"

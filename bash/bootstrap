@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -ex
+
+echo ". $DOTFILES_BASE_PATH/bash/bashrc" > "$HOME/.bashrc"

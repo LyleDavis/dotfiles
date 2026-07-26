@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+REF_SYMBOL="⎇"
+AHEAD_SYMBOL="↑·"
+BEHIND_SYMBOL="↓·"
+STAGED_SYMBOL="●"
+CONFLICTS_SYMBOL="✖"
+MODIFIED_SYMBOL="✚"
+UNTRACKED_SYMBOL="…"
+STASH_SYMBOL="⚑"
+CLEAN_SYMBOL="✔"
+
+git_status_summary() {
+    local conflicts=0 staged=0 modified=0 untracked=0 stash_count=0
+    local ref ahead behind sha tag_name ref_name
+    local status_parts=()
+
+    # use file descriptors to avoid subshell cost        
+    exec 3< <(git status --porcelain=v2 --ignore-submodules=dirty 2>/dev/null)
+    while IFS= read -r line <&3; do
+        case "${line:0:2}" in
+        "u ") ((conflicts++)) ;;
+        "? ") ((untracked++)) ;;
+        "1 " | "2 ")
+            X="${line:2:1}" Y="${line:3:1}"
+            [[ "$X" != "." ]] && ((staged++))
+            [[ "$Y" != "." ]] && ((modified++))
+            ;;
+        esac
+    done
+    exec 3<&-
+
+    if ref_name=$(git symbolic-ref --short -q HEAD 2>/dev/null); then
+        ref="$REF_SYMBOL $ref_name"
+    elif tag_name=$(git describe --exact-match --tags 2>/dev/null); then
+        ref="$REF_SYMBOL $tag_name"
+    else
+        sha=$(git rev-parse --short HEAD 2>/dev/null)
+        ref="$REF_SYMBOL $sha"
+    fi
+
+    if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
+        if counts=$(git rev-list --count --left-right @{u}...HEAD 2>/dev/null); then
+        behind=${counts%%	*}
+        ahead=${counts##*	}
+        ((ahead > 0))  && status_parts+=("$AHEAD_SYMBOL$ahead")
+        ((behind > 0)) && status_parts+=("$BEHIND_SYMBOL$behind")
+        fi
+    fi
+
+    if git rev-parse --git-dir &>/dev/null; then
+        stash_count=$(git stash list 2>/dev/null | wc -l)
+        ((stash_count > 0)) && status_parts+=("$STASH_SYMBOL $stash_count")
+    fi
+
+    ((staged))    && status_parts+=("$STAGED_SYMBOL $staged")
+    ((conflicts)) && status_parts+=("$CONFLICTS_SYMBOL $conflicts")
+    ((modified))  && status_parts+=("$MODIFIED_SYMBOL $modified")
+    ((untracked)) && status_parts+=("$UNTRACKED_SYMBOL $untracked")
+
+    if ((staged == 0 && conflicts == 0 && modified == 0 && untracked == 0 && stash_count == 0)); then
+        status_parts+=("$CLEAN_SYMBOL")
+    fi
+
+    echo "$ref ${status_parts[*]}"
+}
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+  exit 1
+fi
+
+
+git_status_summary
+

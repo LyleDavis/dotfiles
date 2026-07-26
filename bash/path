@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+if [[ -s /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+GOPATH="$HOME/go"
+PATH="/usr/local/go/bin:$PATH"
+PATH="$GOPATH/bin:$PATH"
+PATH="$HOME/.cargo/bin:$PATH"
+
+# local postgres on macos installed via homebrew
+# for local bundle install... Shouldn't really be needed, I hate macos
+PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+PATH="$HOME/.orbstack/bin:$PATH"
+
+PATH="$HOME/.local/bin:$PATH"
+PATH="$DOTFILES_BASE_PATH/bin:$PATH"
+
+export PATH
+export GOPATH

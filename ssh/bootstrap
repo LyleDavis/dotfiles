@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -ex
+
+mkdir -p $HOME/.ssh
+echo "Include $DOTFILES_BASE_PATH/ssh/config" > $HOME/.ssh/config

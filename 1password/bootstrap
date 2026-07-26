@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -ex
+
+mkdir -p "$HOME/.1password"
+
+if [[ `uname` == *Darwin* ]]; then
+    if [[ -d "$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password" ]]; then
+        ln -sf "$HOME/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock" "$HOME/.1password/agent.sock"
+    fi
+
+    mkdir -p "$HOME/Library/LaunchAgents"
+    ln -sf "$DOTFILES_BASE_PATH/1password/com.1password.SSH_AUTH_SOCK.plist" "$HOME/Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist"
+fi

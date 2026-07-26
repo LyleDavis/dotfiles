@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if [[ `uname` == *Darwin* ]]; then
+    bash "$DOTFILES_BASE_PATH/macos/defaults"
+fi
+

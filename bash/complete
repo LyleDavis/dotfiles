@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ -s /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
+  . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+elif [[ -s /etc/bash/bash_completion.sh ]]; then
+    . "/etc/bash/bash_completion.sh"
+fi
+complete -A binding bind
+complete -A setopt set
+complete -A shopt shopt
+complete -A helptopic help
+complete -a alias unalias
+complete -b builtin
+complete -c type which
+complete -cf man sudo
+complete -d cd pushd rmdir

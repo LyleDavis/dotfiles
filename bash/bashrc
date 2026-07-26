@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+export DOTFILES_BASE_PATH="$HOME/dotfiles"
+export XDG_CONFIG_HOME="$HOME/.config"
+
+[[ -n "$PS1" ]] || return
+
+. "$DOTFILES_BASE_PATH/bash/path"
+. "$DOTFILES_BASE_PATH/bash/envs"
+. "$DOTFILES_BASE_PATH/bash/funias"
+. "$DOTFILES_BASE_PATH/bash/complete"
+. "$DOTFILES_BASE_PATH/bash/shell"
+
+[[ -s "$HOME/.credentials" ]] && . "$HOME/.credentials"
+
+. "$DOTFILES_BASE_PATH/bash/prompt"

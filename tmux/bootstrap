@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -p "$HOME/.config"
+rm -rf "$HOME/.config/tmux"
+ln -s "$DOTFILES_BASE_PATH/tmux" "$HOME/.config/tmux"

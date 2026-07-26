@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# Shows a git log of available commits with filtering and multi-selection
+# "Heavily inspired" - meaning basically nicked - from https://github.com/Phantas0s/the_valuable_dev_companion/blob/main/guide-fzf-git/fzf_git_commits.sh
+
+set -e
+
+git_current_branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "Detached")
+
+git_log_single_branch='git log --graph --color --format="%C(white)%h - %C(green)%cs - %C(blue)%s%C(red)%d"'
+git_log_all_branches='git log --all --graph --color --format="%C(white)%h - %C(green)%cs - %C(blue)%s%C(red)%d"'
+get_commit_hash_from_output='echo {+} | grep -o "[a-f0-9]\{7\}"'
+git_commit_diff_preview="[[ \$($get_commit_hash_from_output) != '' ]] && git show --pretty=format: \$($get_commit_hash_from_output) | delta --paging=always"
+git_commit_diff_full="[[ \$($get_commit_hash_from_output) != '' ]] && git show --pretty=format: \$($get_commit_hash_from_output) | delta --paging=always"
+
+header=$(cat <<-EOF
+[TAB]       - Select commit
+[ENTER]     - Exit with selections
+[CTRL]-c    - Exit ignoring selections
+
+[CTRL]-v     - view full file diff
+[CTRL]-t     - toggle all branch view
+ 
+[CTRL]-y    - move preview up
+[CTRL]-e    - move preview down
+[CTRL]-u    - move preview half page up
+[CTRL]-d    - move preview half page down
+EOF
+)
+prompt_single_branch="Current Branch ($git_current_branch) > "
+prompt_all_branches='All Branches > '
+
+eval "$git_log_single_branch" | fzf \
+    --ansi --reverse --no-sort --header-first --multi \
+    --prompt="$prompt_single_branch" \
+    --preview="$git_commit_diff_preview" \
+    --header="$header" \
+    --bind="enter:execute(
+        if [ \"{+}\" != \"{}\" ]; then 
+            echo {+} | grep -o '[a-f0-9]\{7\}' | xargs -n1 git rev-parse | git log --no-walk --date-order --format=\"%H\" --stdin
+        fi
+    )+abort" \
+    --bind="ctrl-t:transform:(
+        if [[ \$FZF_PROMPT == '$prompt_single_branch' ]]; then
+            echo 'change-prompt($prompt_all_branches)+reload($git_log_all_branches)'
+        else
+            echo 'change-prompt($prompt_single_branch)+reload($git_log_single_branch)'
+        fi
+    )" \
+    --bind="ctrl-v:execute($git_commit_diff_full)" \
+    --bind='f1:toggle-header' \
+    --bind='f2:toggle-preview' \
+    --bind='ctrl-y:preview-up' \
+    --bind='ctrl-e:preview-down' \
+    --bind='ctrl-u:preview-half-page-up' \
+    --bind='ctrl-d:preview-half-page-down'

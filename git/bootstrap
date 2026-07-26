@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -ex
+
+rm -f "$HOME/.gitconfig"
+rm -f "$HOME/.gitignore"
+
+ln -sf "$DOTFILES_BASE_PATH/git/gitconfig" "$HOME/.gitconfig"
+ln -sf "$DOTFILES_BASE_PATH/git/gitignore" "$HOME/.gitignore"
