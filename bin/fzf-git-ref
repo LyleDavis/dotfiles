@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+git rev-parse HEAD > /dev/null 2>&1 || exit 1
+
+git for-each-ref --sort=-committerdate --format='%(refname)' refs/heads refs/remotes refs/tags | 
+    grep -v HEAD |
+    fzf --no-multi --ansi --height='~100%' --min-height=18 |
+    sed "s/.* //" | # remove leading whitespace or *
+    sed "s/refs\///" # remove refs/

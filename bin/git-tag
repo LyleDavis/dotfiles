@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e
+
+if ! git rev-parse HEAD >/dev/null 2>&1; then
+  echo "git-tag: not inside a git repository with objects" >&2
+  exit 1
+fi
+
+read -r -p "Tag name: " tag_name
+if [[ -z "$tag_name" ]]; then
+  echo "git-tag: tag name is required" >&2
+  exit 1
+fi
+
+if git show-ref --verify --quiet "refs/tags/$tag_name"; then
+  echo "git-tag: tag '$tag_name' already exists" >&2
+  exit 1
+fi
+
+read -r -p "Tag message (blank -> single space): " tag_message
+if [[ -z "$tag_message" ]]; then
+  tag_message=" "
+fi
+
+git tag -a "$tag_name" -m "$tag_message"
+echo "Created tag: $tag_name"

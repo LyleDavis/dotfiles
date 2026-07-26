@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -e
+
+git rev-parse HEAD >/dev/null 2>&1 || exit 1
+
+ref=
+local_branch=
+ref=$(fzf-git-ref)
+if [[ -z "$ref" ]]; then
+    exit 0
+fi
+
+case "$ref" in 
+    heads/*)
+        git checkout "${ref#heads/}"
+        ;;
+    remotes/*)
+        local_branch="${ref#remotes/}"
+        local_branch="${local_branch#*/}"
+        if git show-ref --verify --quiet "refs/heads/$local_branch"; then
+            git checkout "$local_branch"
+        else
+            git checkout --track "${ref#remotes/}"
+        fi
+        ;;
+    tags/*)
+        git checkout "refs/$ref"
+        ;;
+    *)
+        git checkout "$ref"
+        ;;
+esac

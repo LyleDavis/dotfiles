@@ -5,9 +5,12 @@ if command -v batcat >/dev/null 2>&1; then
 fi
 
 function awsp() {
-    export AWS_PROFILE=$(aws configure list-profiles | fzf)
+    export AWS_PROFILE=$(aws-profiles)
 }
 alias awsl='aws sso login'
+alias awsme='aws sts get-caller-identity'
+alias ecr='aws-ecr-login'
+alias ghcr='ghcr-docker-login'
 alias lzd='lazydocker'
 alias ls='ls --color=auto'
 alias l='eza -lh --group-directories-first --icons=auto'
@@ -18,33 +21,18 @@ alias lag='l -a --git'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-function gt() {
-  tag="$1"
-  msg="$2"
-
-  if [[ -z "$msg" ]]; then
-    msg="$tag"
-  fi
-
-  if [[ -z "$tag" ]]; then
-    echo "tag (first argument) missing"
-  fi
-
-  git tag -a "$tag" -m "$msg"
-}
-
+alias gt='git-tag'
 alias gst='git status'
+alias gss='git-status-summary'
 alias gcm='git commit'
 alias gbc='git branch --show-current'
-alias gac='git add -A && git commit'
-alias lzg='lazygit'
-
-if [[ -d /usr/local/share/chruby ]]; then
-    . /usr/local/share/chruby/chruby.sh
-fi
-
-if [[ -d /opt/homebrew/opt/chruby ]]; then
-    . /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-fi
-
+alias gacm='git add -A && gcm'
+alias gl='fzf-git-log'
+alias gr='fzf-git-ref'
+alias gco='fzf-git-checkout'
+alias gp='git pull'
 alias x='exit'
+alias exe='chmod +x' 
+[[ -d /usr/local/share/chruby ]] && . /usr/local/share/chruby/chruby.sh
+[[ -d /opt/homebrew/opt/chruby ]] && . /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+
