@@ -2,14 +2,30 @@
 
 set -e
 
-if ! git rev-parse HEAD >/dev/null 2>&1; then
-  echo "git-tag: not inside a git repository with objects" >&2
+push=false
+tag_name=""
+tag_message=""
+while getopts ":n:m:p" opt; do
+  case "$opt" in
+    n) tag_name="$OPTARG" ;;
+    m) tag_message="$OPTARG" ;;
+    p) push=true ;;
+    :) echo "git-tag: option -$OPTARG requires an argument" >&2; exit 1 ;;
+    \?) echo "git-tag: unknown option: -$OPTARG" >&2; exit 1 ;;
+  esac
+done
+
+if [[ -z "$tag_name" ]]; then
+  echo "git-tag: tag name is required (-n)" >&2
   exit 1
 fi
 
-read -r -p "Tag name: " tag_name
-if [[ -z "$tag_name" ]]; then
-  echo "git-tag: tag name is required" >&2
+if [[ -z "$tag_message" ]]; then
+  tag_message="$tag_name"
+fi
+
+if ! git rev-parse HEAD >/dev/null 2>&1; then
+  echo "git-tag: not inside a git repository with objects" >&2
   exit 1
 fi
 
@@ -18,10 +34,10 @@ if git show-ref --verify --quiet "refs/tags/$tag_name"; then
   exit 1
 fi
 
-read -r -p "Tag message (blank -> single space): " tag_message
-if [[ -z "$tag_message" ]]; then
-  tag_message=" "
-fi
-
 git tag -a "$tag_name" -m "$tag_message"
 echo "Created tag: $tag_name"
+
+if $push; then
+  git push origin "$tag_name"
+  echo "Pushed tag: $tag_name"
+fi
