@@ -1,3 +1,6 @@
 [submodule "tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmuxpack/tpack
+[submodule "vpm"]
+	path = vpm
+	url = git@github.com:bahamas10/vpm.git
