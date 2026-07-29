@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+rg --color=always --line-number --no-heading --smart-case "$1" | fzf --ansi --delimiter=':' --height=100% --preview='bat --color=always --highlight-line {2} -- {1}' --preview-window='right:50%:+{2}+3/3:~3'

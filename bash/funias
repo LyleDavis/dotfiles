@@ -39,6 +39,10 @@ if has fzf; then
     alias gco='fzf-git-checkout'
 fi
 
+if has rg && has fzf; then
+  alias rgf='ripgrep-fzf'
+fi
+
 alias gt='git-tag'
 alias gst='git status'
 alias gss='git-status-summary'
