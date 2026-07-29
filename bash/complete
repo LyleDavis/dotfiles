@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME/bash-completion"
+
 if [[ -s /opt/homebrew/etc/profile.d/bash_completion.sh ]]; then
   . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 elif [[ -s /usr/local/etc/profile.d/bash_completion.sh ]]; then
