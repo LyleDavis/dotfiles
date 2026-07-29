@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if has xbps-install; then
+  bootstrap_log "has xbps-install, assuming void."
+  if has sudo && has make; then
+    bootstrap_log "has sudo and make, installing vpm"
+    
+    MAKE="$(command -v make)"
+    sudo "$MAKE" -C "$DOTFILES_BASE_PATH/vpm" install
+  else
+    bootstrap_log "no sudo or no make, skipping vpm"
+  fi
+else
+  bootstrap_log "no xbps-install, skipping void"
+fi
+
