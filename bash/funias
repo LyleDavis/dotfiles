@@ -12,6 +12,8 @@ if has aws; then
   alias awsme='aws sts get-caller-identity'
   if has docker; then
     alias ecr='aws-ecr-login'
+    alias dps='docker ps'
+    alias ds='docker stop'
   fi
 fi
 
@@ -52,6 +54,7 @@ alias gacm='git add -A && gcm'
 alias gp='git pull'
 alias x='exit'
 alias exe='chmod +x'
+alias cls='clear'
 
 if has bat; then
     alias cat='bat --paging=never'
