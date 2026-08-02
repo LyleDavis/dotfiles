@@ -1,10 +1,26 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-profile=$(aws configure list-profiles | fzf)
-echo "Logging into $profile ECR..."
-region="$(aws configure get region)"
-account_id="$(aws configure get sso_account_id)"
+check-exists-for aws aws-profiles docker
 
-aws ecr get-login-password --region "$region" | docker login --username AWS --password-stdin "$account_id".dkr.ecr."$region".amazonaws.com
+profile="$(aws-profiles)"
+[[ -n "$profile" ]] || exit 0
+
+region="$(aws --profile "$profile" configure get region)"
+account_id="$(aws --profile "$profile" sts get-caller-identity --query Account --output text)"
+
+if [[ -z "$region" ]]; then
+    echo "aws-ecr-login: no region configured for profile '$profile'" >&2
+    exit 1
+fi
+
+if [[ -z "$account_id" || "$account_id" == "None" ]]; then
+    echo "aws-ecr-login: could not determine AWS account for profile '$profile'" >&2
+    exit 1
+fi
+
+echo "Logging into $account_id ECR in $region with profile $profile..."
+
+aws --profile "$profile" ecr get-login-password --region "$region" |
+    docker login --username AWS --password-stdin "$account_id.dkr.ecr.$region.amazonaws.com"

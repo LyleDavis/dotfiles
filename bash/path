@@ -13,7 +13,6 @@ path_prepend "$HOME/.cargo/bin"
 path_prepend "/opt/homebrew/opt/libpq/bin"
 path_prepend "$HOME/.orbstack/bin"
 path_prepend "$HOME/.local/bin"
-path_prepend "$DOTFILES_BASE_PATH/bin"
 
 chruby_path=""
 [[ -d /usr/local/share/chruby ]] && chruby_path="/usr/local/share/chruby"

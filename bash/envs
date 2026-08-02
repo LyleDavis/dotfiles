@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-export BAT_CONFIG_DIR="$DOTFILES_BASE_PATH/bat"
-export FZF_DEFAULT_COMMAND='fd --type f'
+export BAT_CONFIG_DIR="$XDG_CONFIG_HOME/bat"
+if has fd; then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+fi
 export FZF_DEFAULT_OPTS="--ignore-case --popup 90% --height ~100% --layout reverse --border --inline-info"
 export FZF_CTRL_T_OPTS="
 --walker-skip .git,node_modules,target

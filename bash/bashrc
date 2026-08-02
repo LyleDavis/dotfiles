@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
 
-export DOTFILES_BASE_PATH="$HOME/dotfiles"
-. "$DOTFILES_BASE_PATH/bash/base"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/gitconfig"
 
-[[ -n "$PS1" ]] || return
+export EDITOR='vim'
+export VISUAL='vim'
+export MANPAGER='less'
 
-. "$DOTFILES_BASE_PATH/bash/path"
-. "$DOTFILES_BASE_PATH/bash/envs"
-. "$DOTFILES_BASE_PATH/bash/funias"
-. "$DOTFILES_BASE_PATH/bash/complete"
-. "$DOTFILES_BASE_PATH/bash/shell"
+[[ $- == *i* ]] || return
+
+. "$XDG_CONFIG_HOME/bash/util"
+. "$XDG_CONFIG_HOME/bash/path"
+. "$XDG_CONFIG_HOME/bash/envs"
+. "$XDG_CONFIG_HOME/bash/funias"
+. "$XDG_CONFIG_HOME/bash/complete"
+. "$XDG_CONFIG_HOME/bash/shell"
 
 [[ -s "$HOME/.credentials" ]] && . "$HOME/.credentials"
 
-. "$DOTFILES_BASE_PATH/bash/prompt"
+. "$XDG_CONFIG_HOME/bash/prompt"

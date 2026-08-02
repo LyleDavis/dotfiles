@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+missing=()
+for cmd in "$@"; do
+    command -v "$cmd" >/dev/null 2>&1 || missing+=("$cmd")
+done
+
+if ((${#missing[@]})); then
+    printf 'missing required command(s): %s\n' "${missing[*]}" >&2
+    exit 127
+fi

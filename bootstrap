@@ -1,39 +1,96 @@
 #!/usr/bin/env bash
 
-set -e
+set -euox pipefail
 
-export DOTFILES_BASE_PATH="$HOME/dotfiles"
-. "$DOTFILES_BASE_PATH/bash/base"
-
-bootstrap_log "starting"
-bootstrap_log "loaded shared bootstrap helpers from bash/base"
-
-bootstrap_log "updating git submodules"
 git submodule update --init --recursive
 
-modules=(
-    "1password"
-    "bash"
-    "bat"
-    "bin"
-    "ghostty"
-    "git"
-    "macos"
-    "readline"
-    "tmux"
-    "void"
-)
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+DOTFILES_DIR="$SCRIPT_DIR"
 
-for module in "${modules[@]}"; do
-    bs="$DOTFILES_BASE_PATH/$module/bootstrap"
-    if [[ -s "$bs" ]]; then
-        bootstrap_log "running module: $module"
-        (. "$bs")
-        bootstrap_log "finished module: $module"
-    else
-        bootstrap_log "skipping module: $module (no bootstrap script)"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+mkdir -p "$XDG_CONFIG_HOME" "$XDG_DATA_HOME"
+export GIT_CONFIG_GLOBAL="$HOME/.config/git/gitconfig"
+
+# load bash helpers directly from dotfiles, they're useful during bootstrap but
+# bin may not have been linked yet
+. "$DOTFILES_DIR/bash/util"
+
+# 1password setup for macos
+# create the ~/.1password/agent.sock for easier access to the socket
+# symlink the 1password application ssh socket to ~/.1password/agent.sock
+# create a plist entry to symlink the macos $SSH_AUTH_SOCK to ~/.1password/agent.sock at login
+#   - this is needed as macos creates a new one via launchd each login
+if [[ "$(uname)" == *Darwin* ]]; then
+    onepassword_app_installed=false
+    onepassword_sock="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+    if [[ -d "/Applications/1Password.app" || -d "$HOME/Applications/1Password.app" ]]; then
+        onepassword_app_installed=true
     fi
+
+    if $onepassword_app_installed; then
+        mkdir -p "$XDG_CONFIG_HOME/1Password" "$HOME/Library/LaunchAgents" "$HOME/.1password"
+
+        safelink "$DOTFILES_DIR/1password/com.1password.SSH_AUTH_SOCK.plist" "$XDG_CONFIG_HOME/1Password/com.1password.SSH_AUTH_SOCK.plist"
+        safelink "$XDG_CONFIG_HOME/1Password/com.1password.SSH_AUTH_SOCK.plist" "$HOME/Library/LaunchAgents/com.1password.SSH_AUTH_SOCK.plist"
+
+        if [[ -S "$onepassword_sock" || -e "$onepassword_sock" ]]; then
+            safelink "$onepassword_sock" "$HOME/.1password/agent.sock"
+        fi
+    fi
+fi
+
+safelink "$DOTFILES_DIR/bash" "$XDG_CONFIG_HOME/bash"
+mkdir -p "$XDG_DATA_HOME/bash-completion/completions"
+if has fnm; then
+    fnm completions --shell bash > "$XDG_DATA_HOME/bash-completion/completions/fnm"
+fi
+if has docker; then
+    docker completion bash > "$XDG_DATA_HOME/bash-completion/completions/docker"
+fi
+if has gh; then
+    gh completion -s bash > "$XDG_DATA_HOME/bash-completion/completions/gh"
+fi
+safelink "$XDG_CONFIG_HOME/bash/bashrc" "$HOME/.bashrc"
+safelink "$XDG_CONFIG_HOME/bash/bash_profile" "$HOME/.bash_profile"
+
+safelink "$DOTFILES_DIR/bat" "$XDG_CONFIG_HOME/bat"
+
+mkdir -p "$HOME/.local/bin"
+for binfile in "$DOTFILES_DIR"/bin/*; do
+    filename="${binfile##*/}"
+    safelink "$binfile" "$HOME/.local/bin/$filename"
 done
 
-bootstrap_log "done"
+safelink "$DOTFILES_DIR/ghostty" "$XDG_CONFIG_HOME/ghostty"
+safelink "$DOTFILES_DIR/git" "$XDG_CONFIG_HOME/git"
+safelink "$XDG_CONFIG_HOME/git/gitconfig" "$HOME/.gitconfig"
+
+if [[ "$(uname)" == *Darwin* ]]; then
+    defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+    defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false # disable auto-correct
+    defaults write -g NSAutomaticCapitalizationEnabled -bool false # disable auto-capitalisation
+    defaults write -g AppleShowAllExtensions -bool true # show all extensions in finder
+    chflags nohidden ~/Library # show ~/Library in finder
+    defaults write com.apple.finder _FXShowPosixPathInTitle -bool true # show full path in finder
+    defaults write com.apple.finder ShowStatusBar -bool true # show status bar in finder
+    defaults write com.apple.finder NewWindowTarget -string PfHm # make new finder windows start at home
+	defaults write com.apple.finder NewWindowTargetPath -string "file:///$HOME" # make new finder windows start at home
+    defaults write com.apple.dock autohide -bool true # auto hide/show for dock
+    defaults write com.apple.dock show-recents -bool false # don't show recents in dock
+    defaults write com.apple.screencapture include-date -bool true # include date in screenshots
+    defaults write com.apple.lookup lookupEnabled -dict-add suggestionsEnabled -bool no # don't lookup outside filsystem in spotlight
+    killall Dock Finder # restart dock and finder after potential changes
+fi
+
+safelink "$DOTFILES_DIR/readline" "$XDG_CONFIG_HOME/readline"
+safelink "$XDG_CONFIG_HOME/readline/inputrc" "$HOME/.inputrc"
+
+safelink "$DOTFILES_DIR/tmux" "$XDG_CONFIG_HOME/tmux"
+
+if has xbps-install; then
+    MAKE="$(command -v make)"
+    sudo "$MAKE" -C "$DOTFILES_DIR/vpm" install
+fi
 

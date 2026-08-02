@@ -6,16 +6,27 @@
 	format = ssh
 [core]
 	editor = vim
-	excludesfile = ~/.gitignore
+	excludesfile = ~/.config/git/gitignore
 	fsmonitor = true
 	untrackedcache = true
-  	pager = delta
+	pager = sh -c 'command -v delta >/dev/null 2>&1 && exec delta || exec less'
 [push]
 	autoSetupRemote = true
 [init]
 	defaultBranch = master
+[fetch]
+	prune = true
+	pruneTags = true
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -version:refname
+[column]
+	ui = auto
 [interactive]
-	diffFilter = delta --color-only
+	diffFilter = sh -c 'command -v delta >/dev/null 2>&1 && exec delta --color-only || exec cat'
 [delta]
 	navigate = true
 	line-numbers = true

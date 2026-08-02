@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
+
+check-exists-for fzf
 
 git rev-parse HEAD > /dev/null 2>&1 || exit 1
 

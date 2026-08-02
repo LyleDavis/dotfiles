@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 REF_SYMBOL="⎇"
 AHEAD_SYMBOL="↑·"
 BEHIND_SYMBOL="↓·"
@@ -39,8 +41,8 @@ git_status_summary() {
         ref="$REF_SYMBOL $sha"
     fi
 
-    if git rev-parse --abbrev-ref --symbolic-full-name @{u} &>/dev/null; then
-        if counts=$(git rev-list --count --left-right @{u}...HEAD 2>/dev/null); then
+    if git rev-parse --abbrev-ref --symbolic-full-name '@{u}' &>/dev/null; then
+        if counts=$(git rev-list --count --left-right '@{u}...HEAD' 2>/dev/null); then
         behind=${counts%%	*}
         ahead=${counts##*	}
         ((ahead > 0))  && status_parts+=("$AHEAD_SYMBOL$ahead")

@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-bootstrap_log "writing Ghostty config pointer"
-mkdir -p "$HOME/.config/ghostty"
-echo "config-file = $DOTFILES_BASE_PATH/ghostty/config" > "$HOME/.config/ghostty/config"
-
-bootstrap_log "done"

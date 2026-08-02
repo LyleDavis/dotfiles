@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-bootstrap_log "ensuring ~/.config exists"
-mkdir -p "$HOME/.config"
-bootstrap_log "replacing ~/.config/tmux with symlink to dotfiles"
-rm -rf "$HOME/.config/tmux"
-ln -s "$DOTFILES_BASE_PATH/tmux" "$HOME/.config/tmux"
-
-bootstrap_log "done"

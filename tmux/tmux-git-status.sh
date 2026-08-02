@@ -2,8 +2,7 @@
 
 PANE_CURRENT_PATH="$1"
 PANE_CURRENT_CMD="$2"
-DOTFILES_BASE_PATH="${DOTFILES_BASE_PATH:-$HOME/dotfiles}"
-GSS_BIN="$DOTFILES_BASE_PATH/bin/git-status-summary"
+GSS_BIN="$HOME/.local/bin/git-status-summary"
 
 # if we don't have our gss script for whatever reason, exit
 # ../bin/git-status-summary

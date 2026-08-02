@@ -3,7 +3,9 @@
 # Shows a git log of available commits with filtering and multi-selection
 # "Heavily inspired" - meaning basically nicked - from https://github.com/Phantas0s/the_valuable_dev_companion/blob/main/guide-fzf-git/fzf_git_commits.sh
 
-set -e
+set -euo pipefail
+
+check-exists-for delta fzf
 
 git_current_branch=$(git symbolic-ref --short HEAD 2>/dev/null || echo "Detached")
 

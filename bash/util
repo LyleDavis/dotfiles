@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+has() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+path_prepend() {
+    local dir="$1"
+
+    [[ -n "$dir" ]] || return 1
+    [[ -d "$dir" ]] || return 1
+
+    case ":$PATH:" in
+        *":$dir:"*) ;;
+        *) PATH="$dir:$PATH" ;;
+    esac
+}
+
+safelink() {
+    src="$1"
+    dest="$2"
+
+    if [[ -L "$dest" ]]; then # if dest exists and is already a symlink
+        ln -sfn "$src" "$dest"
+    elif [[ ! -e "$dest" ]]; then # if dest does not exist
+        ln -s "$src" "$dest"
+    else # dest already exists and is not a symlink
+        echo "[ERROR] cannot symlink $src -> $dest (already exists, not a symlink)" >&2
+        exit 1
+    fi
+}

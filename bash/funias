@@ -6,7 +6,12 @@ fi
 
 if has aws; then
   function awsp() {
-      export AWS_PROFILE=$(aws-profiles)
+      local profile
+
+      profile="$(aws-profiles)" || return
+      [[ -n "$profile" ]] || return
+
+      export AWS_PROFILE="$profile"
   }
   alias awsl='aws sso login'
   alias awsme='aws sts get-caller-identity'
@@ -35,7 +40,9 @@ if has eza; then
     alias lta='lt -a'
 fi
 if has fzf; then
-    alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+    if has bat; then
+        alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+    fi
     alias gl='fzf-git-log'
     alias gr='fzf-git-ref'
     alias gco='fzf-git-checkout'
@@ -55,6 +62,9 @@ alias gp='git pull'
 alias x='exit'
 alias exe='chmod +x'
 alias cls='clear'
+lspath() {
+    tr ':' '\n' <<< "$PATH"
+}
 
 if has bat; then
     alias cat='bat --paging=never'

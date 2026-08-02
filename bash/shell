@@ -4,15 +4,11 @@ if has fzf; then
     eval "$(fzf --bash)"
 fi
 
-export HISTCONTROL="ignorespace:erasedups"
+export HISTCONTROL="ignorespace:ignoredups:erasedups"
 export HISTSIZE=5000
 export HISTFILESIZE=5000
 export HISTIGNORE="ls:ll:l:pwd:clear:history"
 export HISTTIMEFORMAT="%F %T "
-
-export EDITOR='vim'
-export VISUAL='vim'
-export MANPAGER='less'
 
 if has bat; then
     export PAGER='bat'
@@ -44,6 +40,8 @@ shopt -s cmdhist
 shopt -s lithist
 shopt -s globstar
 shopt -s checkjobs
+shopt -s histverify
+shopt -s no_empty_cmd_completion
 
 
 set -o noclobber
