@@ -4,13 +4,19 @@ if has fzf; then
     eval "$(fzf --bash)"
 fi
 
+# Ignore leading-space commands, avoid adjacent duplicates, and remove older duplicates.
 export HISTCONTROL="ignorespace:ignoredups:erasedups"
+# Keep this many commands in memory for the current shell.
 export HISTSIZE=5000
+# Keep this many commands in the history file across shells.
 export HISTFILESIZE=5000
+# Do not save these common low-signal commands in history.
 export HISTIGNORE="ls:ll:l:pwd:clear:history"
+# Prefix `history` output with the command timestamp.
 export HISTTIMEFORMAT="%F %T "
 
 if has bat; then
+    # Use bat as the default pager when it is available.
     export PAGER='bat'
 fi
 
@@ -30,19 +36,34 @@ export LESS_TERMCAP_ZV=$'\e[75m'
 export LESS_TERMCAP_ZO=$'\e[73m'
 export LESS_TERMCAP_ZW=$'\e[75m'
 
+# Append new history entries instead of overwriting the history file.
 shopt -s histappend
+# Correct minor spelling mistakes in directory names passed to cd.
 shopt -s cdspell
+# Refresh terminal size after each command.
 shopt -s checkwinsize
+# Enable extended glob patterns such as !(pattern) and @(a|b).
 shopt -s extglob
+# Treat a bare directory name as `cd directory` when supported.
 shopt -s autocd   2>/dev/null || true
+# Correct minor spelling mistakes during directory completion when supported.
 shopt -s dirspell 2>/dev/null || true
+# Save multi-command lines as one history entry.
 shopt -s cmdhist
+# Preserve embedded newlines in multi-line history entries.
 shopt -s lithist
+# Enable recursive globbing with **.
 shopt -s globstar
+# Warn before exiting when stopped or running jobs exist.
 shopt -s checkjobs
+# Show history expansions for review instead of executing them immediately.
 shopt -s histverify
+# Avoid completing every command name on an empty line.
 shopt -s no_empty_cmd_completion
-
-
+# Expand variables in completed paths to their concrete values.
+shopt -s direxpand
+# Report completed background jobs immediately.
+set -o notify
+# Prevent redirection from overwriting existing files unless forced.
 set -o noclobber
 

@@ -1,28 +1,56 @@
+## Preserve 8-bit input characters instead of treating them as escape prefixes.
 set meta-flag on
+## Allow 8-bit input characters to be passed through to Readline.
 set input-meta on
+## Allow 8-bit output characters to be displayed directly.
 set output-meta on
+## Do not convert 8-bit characters into escape-prefixed sequences.
 set convert-meta off
+## Match completions without requiring exact case.
 set completion-ignore-case on
+## Show at least two characters of the common prefix before completion lists.
 set completion-prefix-display-length 2
+## Show all possible completions immediately when a match is ambiguous.
 set show-all-if-ambiguous on
+## Show completions immediately when pressing Tab would not change the line.
 set show-all-if-unmodified on
+## Search backward through history using the text before the cursor.
 "\e[A": history-search-backward
+## Search forward through history using the text before the cursor.
 "\e[B": history-search-forward
+## Move right one character when the terminal sends a right-arrow escape.
 "\e[C": forward-char
+## Move left one character when the terminal sends a left-arrow escape.
 "\e[D": backward-char
+## Append a slash to completed symlinks that point to directories.
 set mark-symlinked-directories on
+## Do not include dotfiles in completion unless the pattern starts with a dot.
 set match-hidden-files off
+## Print long completion lists directly instead of invoking a pager.
 set page-completions off
+## Ask before displaying more than this many completion candidates.
 set completion-query-items 200
+## Mark completion entries with characters that indicate file type.
 set visible-stats on
+## Do not insert text that is already present after the cursor.
 set skip-completed-text on
+## Color completion entries by file type when supported by the terminal.
 set colored-stats on
+## Cycle through completion candidates with Tab.
 TAB: menu-complete
+## Cycle backward through completion candidates with Shift-Tab.
 "\e[Z": menu-complete-backward
+## Show the shared prefix while menu-completing candidates.
 set menu-complete-display-prefix on
+## Preserve pasted text as literal input instead of triggering key bindings.
 set enable-bracketed-paste on
+## Disabled: show the current editing mode in the prompt.
 # set show-mode-in-prompt on
+## Disabled: use vi-style Readline editing instead of emacs-style editing.
 # set editing-mode vi
+## Append a slash to completed directory names.
 set mark-directories on
+## Treat hyphens and underscores as equivalent when matching completions.
 set completion-map-case on
+## Color the shared prefix portion of completion candidates.
 set colored-completion-prefix on
