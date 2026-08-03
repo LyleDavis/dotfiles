@@ -1,3 +1,4 @@
 --map-syntax "*.ignored.*:Git Ignore"
---style="numbers,changes,header"
+--style="numbers,changes,header,rule,snip"
 --italic-text=always
+--theme="base16"
