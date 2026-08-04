@@ -67,6 +67,8 @@ safelink "$DOTFILES_DIR/ghostty" "$XDG_CONFIG_HOME/ghostty"
 safelink "$DOTFILES_DIR/git" "$XDG_CONFIG_HOME/git"
 safelink "$XDG_CONFIG_HOME/git/gitconfig" "$HOME/.gitconfig"
 
+safelink "$DOTFILES_DIR/npm/npmrc" "$HOME/.npmrc"
+
 if [[ "$(uname)" == *Darwin* ]]; then
     defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
     defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false # disable auto-correct
